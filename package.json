@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "user": "node src/user-data.js",
-    "com": "node src/com-data.js",
-    "pays": "node src/pays-data.js"
+    "user": "npx ts-node src/user-data.ts",
+    "com": "node src/com-data.ts",
+    "pays": "node src/pays-data.ts"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +14,10 @@
   "dependencies": {
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
-    "mongoose": "^9.0.1"
+    "mongoose": "^9.0.1",
+    "ts": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3"

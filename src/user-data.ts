@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
 
 const users = mongoose.model('users', userSchema);
 
+for ( let data of userData) {
+  console.log( data)
+}
+
+/*
 main().catch(err => console.log(err));
 
 for ( let data of userData) {
@@ -29,4 +34,4 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/Exited');
   console.log("connecté");
 
-}
+}*/

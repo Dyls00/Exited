@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "name": "data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "user": "node user-data.js",
+    "com": "node com-data.js",
+    "pays": "node pays-data.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "mongoose": "^9.0.1"
+  }
+}

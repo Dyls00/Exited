@@ -1,4 +1,4 @@
-import { getData } from "./export.js";
+import { getData } from "./export/export.js";
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });

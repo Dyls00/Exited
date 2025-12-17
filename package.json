@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "user": "node user-data.js",
-    "com": "node com-data.js",
-    "pays": "node pays-data.js"
+    "user": "node src/user-data.js",
+    "com": "node src/com-data.js",
+    "pays": "node src/pays-data.js"
   },
   "author": "",
   "license": "ISC",

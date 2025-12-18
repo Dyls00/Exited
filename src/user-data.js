@@ -7,7 +7,7 @@ dotenv.config({ path: '.env' });
 const userData = await getData(process.env.URL_USER);
 
 const userSchema = new mongoose.Schema({
-  id: String,
+  _id: Number,
   name: String,
   username: String,
   email: String,
@@ -19,19 +19,21 @@ const userSchema = new mongoose.Schema({
 
 const users = mongoose.model('users', userSchema);
 
-for ( let data of userData) {
-  console.log( data)
-}
-
-/*
 main().catch(err => console.log(err));
 
-for ( let data of userData) {
-  console.log( data.name)
-}
-
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Exited');
+  await mongoose.connect(process.env.DB);
   console.log("connecté");
-
-}*/
+  
+for ( let data of userData) {
+  const userfetch = new users({_id: data.id, name: data.name, username: data.username, email: data.email,
+    adresse: data.address.street,
+    phone: data.phone,
+    website: data.website,
+    company: data.company
+  })
+  await userfetch.save();
+}
+mongoose.connection.close();
+console.log("Fetch réussi ! déconnecté");
+}

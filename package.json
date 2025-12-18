@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "user": "npx ts-node src/user-data.ts",
-    "com": "node src/com-data.ts",
-    "pays": "node src/pays-data.ts"
+    "user": "node src/user-data.js",
+    "com": "node src/com-data.js",
+    "pays": "node src/pays-data.js"
   },
   "author": "",
   "license": "ISC",

@@ -51,7 +51,6 @@ console.log("Fetch pays réussi !");
 async function main() {
   try {
     await mongoose.connect(process.env.DB);
-    console.log("Connecté");
 
     for (const data of userData) {
       const user = new User({

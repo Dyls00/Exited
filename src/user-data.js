@@ -1,8 +1,9 @@
 import { getData } from "./export/export.js";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { listPays } from "./pays-data.js";
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: ".env" });
 
 const userData = await getData(process.env.URL_USER);
 
@@ -11,29 +12,44 @@ const userSchema = new mongoose.Schema({
   name: String,
   username: String,
   email: String,
-  adresse : Array,
+  adresse: {
+    street: String,
+    pays: String
+  },
   phone: String,
   website: String,
-  company: Array
+  company: Object
 });
 
-const users = mongoose.model('users', userSchema);
+const User = mongoose.model("users", userSchema);
 
-main().catch(err => console.log(err));
+main();
 
 async function main() {
-  await mongoose.connect(process.env.DB);
-  console.log("connecté");
-  
-for ( let data of userData) {
-  const userfetch = new users({_id: data.id, name: data.name, username: data.username, email: data.email,
-    adresse: data.address.street,
-    phone: data.phone,
-    website: data.website,
-    company: data.company
-  })
-  await userfetch.save();
-}
-mongoose.connection.close();
-console.log("Fetch réussi ! déconnecté");
+  try {
+    await mongoose.connect(process.env.DB);
+    console.log("Connecté");
+
+    for (const data of userData) {
+      const user = new User({
+        _id: data.id,
+        name: data.name,
+        username: data.username,
+        email: data.email,
+        adresse: {
+          street: data.address.street,
+          pays: listPays[Math.floor(Math.random() * listPays.length)]
+        },
+        phone: data.phone,
+        website: data.website,
+        company: data.company
+      });
+      await user.save();
+    }
+  } catch (error) {
+    console.error("Erreur :", error);
+  } finally {
+    await mongoose.connection.close();
+    console.log("Fetch réussi ! déconnecté");
+  }
 }

@@ -11,7 +11,7 @@ const paysSchema = new mongoose.Schema({
 });
 
 const country = mongoose.model('country', paysSchema);
- const listPays = paysData.variables[1].valueTexts;
+ export const listPays = paysData.variables[1].valueTexts;
 
 
 main().catch(err => console.log(err));

@@ -1,11 +1,19 @@
 import { getData } from "./export/export.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { listPays } from "./pays-data.js";
 
 dotenv.config({ path: ".env" });
 
 const userData = await getData(process.env.URL_USER);
+
+const paysData = await getData(process.env.URL_PAYS);
+
+const paysSchema = new mongoose.Schema({
+    name: String
+});
+
+const country = mongoose.model('country', paysSchema);
+ export const listPays = paysData.variables[1].valueTexts;
 
 const userSchema = new mongoose.Schema({
   _id: Number,
@@ -24,6 +32,21 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("users", userSchema);
 
 main();
+paysList();
+
+async function paysList() {
+  await mongoose.connect(process.env.DB);
+  console.log("connecté");
+    for ( let data of listPays) {
+
+    
+    const paysfetch = new country({
+    name: data
+  })
+  await paysfetch.save();
+}
+console.log("Fetch pays réussi !");
+}
 
 async function main() {
   try {
@@ -50,6 +73,6 @@ async function main() {
     console.error("Erreur :", error);
   } finally {
     await mongoose.connection.close();
-    console.log("Fetch réussi ! déconnecté");
+    console.log("Fetch users réussi ! déconnecté");
   }
 }
